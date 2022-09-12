@@ -38,6 +38,13 @@ class Pdf {
 		// Handle custom fonts
 		$mpdf_config = $this->addCustomFontsConfig($mpdf_config);
 
+		// add addition custom mpdf config
+		$mpdf_config = array_merge(
+			$mpdf_config,
+			Config::get('pdf.mpdf_config', []),
+			isset($config['mpdf_config']) ? $config['mpdf_config'] : []
+		);
+
 		$this->mpdf = new Mpdf\Mpdf($mpdf_config);
 
 		// If you want to change your document title,
